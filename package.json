@@ -9,7 +9,7 @@
 
     "build": "npm run build:client && npm run build:server",
 
-    "build:client": "cd client && npm install --omit=dev && npm run build && cd .. && rm -rf server/public && mkdir -p server/public && cp -r client/dist/* server/public/",
+"build:client": "cd client && npm install && npm run build && cd .. && rm -rf server/public && mkdir -p server/public && cp -r client/dist/* server/public/"
 
     "build:server": "esbuild server/index-prod.ts --platform=node --bundle --format=esm --packages=external --outfile=dist/index.js",
 
