@@ -1,0 +1,927 @@
+:root {
+  --primary: #06b39a;
+  --primary-dark: #049873;
+  --secondary: #1a1a1a;
+  --background: #0a0a0a;
+  --card: #1a1a1a;
+  --border: #333333;
+  --text: #ffffff;
+  --text-muted: #999999;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --radius: 8px;
+  --spacing: 1rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background-color: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--background);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.wallet-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.wallet-balance {
+  font-weight: 600;
+  color: var(--primary);
+  min-width: 60px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.search-section {
+  margin-bottom: 2rem;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-header h2 {
+  font-size: 1.875rem;
+}
+
+.search-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .search-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input-field,
+.select-field {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.input-field:focus,
+.select-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(6, 179, 154, 0.1);
+}
+
+textarea.input-field {
+  font-family: inherit;
+  resize: vertical;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--background);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background-color: var(--card);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.btn-outline:hover {
+  background-color: rgba(6, 179, 154, 0.1);
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.panel-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.technician-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 1rem;
+}
+
+.technician-card:hover {
+  border-color: var(--primary);
+  background-color: rgba(6, 179, 154, 0.05);
+}
+
+.tech-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--background);
+  flex-shrink: 0;
+}
+
+.tech-info {
+  flex: 1;
+}
+
+.tech-name {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.tech-meta {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.tech-skills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.skill-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background-color: rgba(6, 179, 154, 0.1);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.tech-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.rating-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.whatsapp-btn {
+  background-color: var(--success);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.whatsapp-btn:hover {
+  background-color: #059669;
+}
+
+.job-card {
+  padding: 1rem;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+}
+
+.job-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.job-meta {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.job-description {
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+}
+
+.job-budget {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.job-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.job-actions .btn {
+  flex: 1;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+}
+
+.loading-spinner {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-muted);
+}
+
+.login-prompt {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.login-prompt h2 {
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+}
+
+.login-prompt p {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: var(--card);
+  border-radius: var(--radius);
+  padding: 2rem;
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.modal-lg {
+  max-width: 800px;
+}
+
+.modal-sm {
+  max-width: 400px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: var(--text);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.modal-actions .btn {
+  flex: 1;
+}
+
+.profile-content {
+  padding: 1rem 0;
+}
+
+.profile-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--background);
+  flex-shrink: 0;
+}
+
+.profile-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.profile-info p {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.profile-section {
+  margin-bottom: 2rem;
+}
+
+.profile-section h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.photo-slider {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: var(--background);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.photo-slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.photo-nav.prev {
+  left: 1rem;
+}
+
+.photo-nav.next {
+  right: 1rem;
+}
+
+.photo-counter {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.rating-card {
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.rating-display {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.rating-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.rating-stars {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.star {
+  color: #fbbf24;
+  font-size: 1.25rem;
+}
+
+.review-count {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.price-card {
+  background: linear-gradient(135deg, rgba(6, 179, 154, 0.1), rgba(6, 179, 154, 0.05));
+  border: 1px solid var(--primary);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.price-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.price-value {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.price-unit {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.profile-actions .btn {
+  flex: 1;
+}
+
+.whatsapp-contact {
+  background-color: var(--success);
+}
+
+.whatsapp-contact:hover {
+  background-color: #059669;
+}
+
+.text-small {
+  font-size: 0.875rem;
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.amount-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .search-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    margin: 1rem;
+  }
+}
+/* Two Box Layout */
+.two-box-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.two-box-scroll {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+
+@media (max-width: 1024px) {
+  .two-box-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tech Card */
+.tech-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tech-card:hover {
+  border-color: var(--primary);
+  background-color: rgba(6, 179, 154, 0.05);
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--background);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.tech-main {
+  flex: 1;
+}
+
+.tech-main b {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.tech-sub {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.tech-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: rgba(6, 179, 154, 0.1);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.rating {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.whatsapp-link {
+  text-decoration: none;
+}
+
+.whatsapp-btn {
+  background-color: var(--success);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.2s;
+}
+
+.whatsapp-btn:hover {
+  background-color: #059669;
+}
+
+/* Job Card */
+.job-card {
+  padding: 12px;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+}
+
+.job-top {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.job-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.job-title b {
+  font-weight: 600;
+}
+
+.job-meta {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.price-tag {
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.bid-btn {
+  background-color: var(--primary);
+  color: var(--background);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.bid-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.bidders-list {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.bid-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 0.875rem;
+}
+
+.accept-btn {
+  background-color: var(--success);
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.accept-btn:hover {
+  background-color: #059669;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+#techPanel, #jobsPanel {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+#techPanel h2, #jobsPanel h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}

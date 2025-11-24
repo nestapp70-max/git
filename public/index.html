@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LabourConnect - Pan-India Labour & Technician Marketplace">
+  <title>LabourConnect - Find Skilled Technicians</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app-container">
+    <header class="header">
+      <div class="header-container">
+        <div class="header-left">
+          <h1 class="logo">LabourConnect</h1>
+        </div>
+        <div class="header-right">
+          <div class="wallet-info" id="walletInfo" style="display: none;">
+            <span class="wallet-label">Wallet:</span>
+            <span class="wallet-balance" id="walletBalance">₹0</span>
+            <button class="btn btn-primary btn-sm" onclick="showRechargeModal()">Recharge</button>
+          </div>
+          <button class="btn btn-primary" id="loginBtn" onclick="showLoginModal()">Login</button>
+          <button class="btn btn-secondary" id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <div class="container">
+        <div class="search-section" id="searchSection" style="display: none;">
+          <div class="search-header">
+            <h2>Find Technicians</h2>
+            <button class="btn btn-primary" onclick="showPostJobModal()">Post Job</button>
+          </div>
+
+          <div class="search-controls">
+            <input 
+              type="text" 
+              id="locationInput" 
+              placeholder="Search location..." 
+              class="input-field"
+              onkeyup="filterTechnicians()"
+            >
+            <select id="categorySelect" class="select-field" onchange="filterTechnicians()">
+              <option value="">All Categories</option>
+              <option value="electrician">Electrician</option>
+              <option value="plumber">Plumber</option>
+              <option value="carpenter">Carpenter</option>
+              <option value="painter">Painter</option>
+              <option value="mason">Mason</option>
+            </select>
+            <button class="btn btn-secondary" onclick="voiceSearch()">🎤 Voice Search</button>
+          </div>
+        </div>
+
+        <div class="two-box-wrap two-box-scroll" role="region" aria-label="Technicians and job bids" id="dashboardGrid" style="display: none;">
+          <!-- TECHNICIANS PANEL -->
+          <div class="panel" id="techPanel">
+            <h2>Available Technicians</h2>
+            <p class="muted" style="margin-top:6px; margin-bottom:12px;">Closest &amp; verified — click WhatsApp to chat or tap to view profile</p>
+            <div id="techList"></div>
+          </div>
+
+          <!-- JOBS / BIDS PANEL -->
+          <div class="panel" id="jobsPanel">
+            <h2>Customer Job Bids</h2>
+            <p class="muted" style="margin-top:6px; margin-bottom:12px;">Open jobs — technicians bid, customers accept the best offer</p>
+            <div id="jobList"></div>
+          </div>
+        </div>
+
+        <div class="login-prompt" id="loginPrompt" style="display: none;">
+          <h2>Welcome to LabourConnect</h2>
+          <p>Sign in to access the full marketplace</p>
+          <button class="btn btn-primary btn-lg" onclick="showLoginModal()">Sign In / Register</button>
+        </div>
+      </div>
+    </main>
+
+    <div class="modal" id="profileModal">
+      <div class="modal-content modal-lg">
+        <button class="modal-close" onclick="closeProfileModal()">&times;</button>
+        <div id="profileContent" class="profile-content"></div>
+      </div>
+    </div>
+
+    <div class="modal" id="loginModal">
+      <div class="modal-content modal-sm">
+        <button class="modal-close" onclick="closeLoginModal()">&times;</button>
+        <h2>Sign In to LabourConnect</h2>
+        <div class="form-group">
+          <label>Phone Number (10 digits)</label>
+          <input 
+            type="tel" 
+            id="phoneInput" 
+            placeholder="9876543210" 
+            class="input-field"
+            maxlength="10"
+          >
+        </div>
+        <div class="form-group" id="otpGroup" style="display: none;">
+          <label>Enter OTP</label>
+          <input 
+            type="text" 
+            id="otpInput" 
+            placeholder="123456" 
+            class="input-field"
+            maxlength="6"
+          >
+        </div>
+        <div class="form-group" id="roleGroup" style="display: none;">
+          <label>Select Role</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="role" value="customer" checked>
+              <span>Customer</span>
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="role" value="technician">
+              <span>Technician</span>
+            </label>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-full" id="loginActionBtn" onclick="sendOTP()">Send OTP</button>
+        <p class="text-small text-muted" style="margin-top: 12px;">OTP will be logged to console (development mode)</p>
+      </div>
+    </div>
+
+    <div class="modal" id="rechargeModal">
+      <div class="modal-content modal-sm">
+        <button class="modal-close" onclick="closeRechargeModal()">&times;</button>
+        <h2>Recharge Wallet</h2>
+        <p class="text-muted">Choose an amount to add to your wallet</p>
+        <div class="amount-buttons">
+          <button class="btn btn-outline" onclick="recharge(100)">₹100</button>
+          <button class="btn btn-outline" onclick="recharge(200)">₹200</button>
+          <button class="btn btn-outline" onclick="recharge(500)">₹500</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="postJobModal">
+      <div class="modal-content modal-sm">
+        <button class="modal-close" onclick="closePostJobModal()">&times;</button>
+        <h2>Post a New Job</h2>
+        <form onsubmit="submitJob(event)">
+          <div class="form-group">
+            <label>Job Title</label>
+            <input type="text" id="jobTitle" class="input-field" required>
+          </div>
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="jobDesc" class="input-field" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select id="jobCategory" class="select-field" required>
+              <option value="">Select category</option>
+              <option value="electrician">Electrician</option>
+              <option value="plumber">Plumber</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Budget (₹)</label>
+            <input type="number" id="jobBudget" class="input-field" required>
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" id="jobLocation" class="input-field" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Post Job</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal" id="unlockModal">
+      <div class="modal-content modal-sm">
+        <button class="modal-close" onclick="closeUnlockModal()">&times;</button>
+        <h2>Unlock Contact?</h2>
+        <p>Cost: <strong>₹10</strong></p>
+        <p id="unlockMessage" class="text-muted"></p>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="closeUnlockModal()">Cancel</button>
+          <button class="btn btn-primary" onclick="confirmUnlock()">Unlock Contact</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
